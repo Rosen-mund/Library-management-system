@@ -1,0 +1,21 @@
+{% extends "library_app/base.html" %}
+{% block content %}
+
+<h3>Return Book</h3>
+
+<div class="card p-3 mb-3">
+  <p><strong>Book:</strong> {{ tx.book.title }}</p>
+  <p><strong>Serial:</strong> {{ tx.serial_no }}</p>
+  <p><strong>Issue date:</strong> {{ tx.issue_date }}</p>
+  <p><strong>Expected return:</strong> {{ tx.expected_return_date }}</p>
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="card p-4">
+    {{ form.as_p }}
+    <button class="btn btn-primary">Submit Return</button>
+  </div>
+</form>
+
+{% endblock %}

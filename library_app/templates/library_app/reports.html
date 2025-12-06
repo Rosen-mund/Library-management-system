@@ -1,0 +1,55 @@
+{% extends "library_app/base.html" %}
+{% block content %}
+
+<h2>Reports</h2>
+
+<h4 class="mt-4">Issued Books</h4>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Book</th>
+      <th>User</th>
+      <th>Issue Date</th>
+      <th>Return Due</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in issued %}
+    <tr>
+      <td>{{ t.book.title }}</td>
+      <td>{{ t.user.username }}</td>
+      <td>{{ t.issue_date }}</td>
+      <td>{{ t.expected_return_date }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-center">No issued books</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<h4 class="mt-4">Returned Books</h4>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Book</th>
+      <th>User</th>
+      <th>Returned On</th>
+      <th>Fine</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in returned %}
+    <tr>
+      <td>{{ t.book.title }}</td>
+      <td>{{ t.user.username }}</td>
+      <td>{{ t.actual_return_date }}</td>
+      <td>{{ t.fine }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-center">No returned books</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

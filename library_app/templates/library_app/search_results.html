@@ -1,0 +1,36 @@
+{% extends "library_app/base.html" %}
+{% block content %}
+
+<h3>Search Results</h3>
+
+<form method="get" class="mb-3">
+  <input class="form-control" name="q" placeholder="Search by title" value="{{ request.GET.q }}">
+</form>
+
+<form method="get" action="{% url 'book_issue' 0 %}">
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Select</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Serial</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for b in books %}
+    <tr>
+      <td><input type="radio" name="book_id" value="{{ b.id }}"></td>
+      <td>{{ b.title }}</td>
+      <td>{{ b.author }}</td>
+      <td>{{ b.serial_no }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<button class="btn btn-primary">Issue Selected</button>
+</form>
+
+{% endblock %}

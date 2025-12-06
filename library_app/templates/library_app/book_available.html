@@ -1,0 +1,59 @@
+{% extends "library_app/base.html" %}
+{% block content %}
+
+<h3>Book Availability</h3>
+
+<form method="get" class="row mt-3 mb-4">
+  <div class="col-md-3">
+    <input class="form-control" name="title" placeholder="Title" value="{{ request.GET.title }}">
+  </div>
+
+  <div class="col-md-3">
+    <input class="form-control" name="author" placeholder="Author" value="{{ request.GET.author }}">
+  </div>
+
+  <div class="col-md-3">
+    <input class="form-control" name="serial_no" placeholder="Serial No" value="{{ request.GET.serial_no }}">
+  </div>
+
+  <div class="col-md-3">
+    <button class="btn btn-outline-primary w-100">Search</button>
+  </div>
+</form>
+
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Serial</th>
+      <th>Type</th>
+      <th>Available</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.serial_no }}</td>
+      <td>{{ book.get_type_display }}</td>
+      <td>{% if book.available %}Yes{% else %}No{% endif %}</td>
+
+      <td>
+        {% if book.available %}
+        <a href="{% url 'book_issue' book.id %}" class="btn btn-success btn-sm">Issue</a>
+        {% else %}
+        <span class="text-muted">Not Available</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-center">No books found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

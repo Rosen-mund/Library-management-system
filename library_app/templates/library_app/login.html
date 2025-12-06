@@ -1,0 +1,26 @@
+{% extends "library_app/base.html" %}
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="text-center mb-4">Library Management System</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label class="form-label">User ID</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+
+        <p class="text-muted text-center mt-3">
+            Login as <b>Admin</b> using superuser credentials.
+        </p>
+    </form>
+</div>
+{% endblock %}
